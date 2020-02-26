@@ -43,10 +43,10 @@
 	
 	.box3{
 		background: pink;
-		height: 450px;
+		height: 490px;
 	}
 	.box1,.box2,.box4{
-		height: 450px;
+		height: 490px;
 		display: inline-block;
 		/* float: right; */
 		background: pink;
@@ -63,7 +63,7 @@
 	}
 	.content1{
 		padding:0 70px 70px 70px;
-		margin-top: 90px;
+		margin-top: 130px;
 		font-family: 'Noto Sans TC', sans-serif;
 		color: black;
 		text-shadow: 1px 1px rgba(230,180,180,0.6);
@@ -89,7 +89,7 @@
 				left: calc(50% - 254px);
 			}
 			.content1{
-				margin-top:105px;
+				margin-top:90px;
 			}
 		}
 		@media (max-width: 600px) {
