@@ -11,10 +11,9 @@
 			<p class="col-7">適合使用的</p>
 			<select class="tp col-8 col-md-7  form-control mb-5" v-model="tp">
 				<option>化妝水</option>
+				<option>精華液</option>
 				<option>乳液</option>
 				<option>凝膠</option>
-				<option>面膜</option>
-				<option>所有保養品</option>
 			</select>
 			<button class="btn btn-lg btn-info col-7" @click="search">Go!</button>
 			<transition name="shrink" mode="out-in">

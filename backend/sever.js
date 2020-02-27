@@ -73,17 +73,37 @@ app.post('/skin/new',(req,res)=>{
 	
 })
 
+
 app.post('/skin/search',(req,res)=>{
-	if(req.body.params.tp=='所有保養品'){
-		skin.find().then(result=>{
-			res.json(result);
-		});
-	}else{
-		skin.find({type:req.body.params.tp}).then(result=>{
-			console.log(result);
-			res.json(result);
+	skin.find({type:req.body.params.tp}).then(result=>{
+		const beforeSort = result;
+		var compareNum;
+		var allSkin;
+		if(req.body.params.skin=='痘痘肌'){
+			compareNum = (a, b)=>{
+				return a.totalA - b.totalA;
+			};
+		}else if(req.body.params.skin=='敏感肌'){
+			compareNum = (a, b)=>{
+				return a.totalB - b.totalB;
+			};
+		}else if(req.body.params.skin=='酒糟肌'){
+			compareNum = (a, b)=>{
+				return a.totalC - b.totalC;
+			};
+		}else{
+			for( let i = 0; i <beforeSort.length; i++){
+				beforeSort[i].totalPoint = beforeSort[i].totalA + beforeSort[i].totalB + beforeSort[i].totalC;
+			}
+			compareNum = (a, b)=>{
+				return a.totalPoint - b.totalPoint;
+			};
+		}
+		
+		beforeSort.sort(compareNum);
+		res.json(beforeSort);
 	})
-	}
+	
 })
 
 app.listen(port,()=>{
