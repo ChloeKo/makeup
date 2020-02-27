@@ -17,15 +17,15 @@ const skinSchema = new mongoose.Schema({
 		type:Array,
 		required:true
 	},
-	totalA:{
+	totalA:{//痘痘
 		type:Number,
 		default:0
 	},
-	totalB:{
+	totalB:{//敏感
 		type:Number,
 		default:0
 	},
-	totalC:{
+	totalC:{//酒糟
 		type:Number,
 		default:0
 	}
