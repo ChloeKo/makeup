@@ -19,10 +19,10 @@
 	    </ul>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item ">
-			  <a class="nav-link" href="#">登入 <span class="sr-only">(current)</span></a>
+			  <router-link class="nav-link" to="/login" active-class="active" exact>登入 <span class="sr-only">(current)</span></router-link>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link" href="#">註冊</a>
+			  <router-link class="nav-link" to="/regist">註冊</router-link>
 			</li>
 		</ul>
 	  </div>

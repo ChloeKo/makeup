@@ -20,7 +20,7 @@
 				<div class="result" v-if="is">
 					<span @click="is = !is">X</span>
 					<div class="row justify-content-around">
-						<Result v-for="r in result" :result="r"></Result>
+						<Result v-for="r in result" :result="r" :skin="skin"></Result>
 					</div>
 				</div>
 			</transition>

@@ -5,7 +5,10 @@
 				<img :src="result.pic" class="card-img-top" alt="">
 				<div class="card-body">
 					<h5 class="card-title">{{result.name}}</h5>
-					<p class="card-text">敏感指數：</p>
+					<p class="card-text" v-if="skin=='痘痘肌'">痘痘肌敏感指數：{{result.totalA}}</p>
+					<p class="card-text" v-if="skin=='敏感肌'">敏感肌敏感指數：{{result.totalB}}</p>
+					<p class="card-text" v-if="skin=='酒糟肌'">酒糟肌敏感指數：{{result.totalC}}</p>
+					<p class="card-text" v-if="skin=='所有肌膚'">綜合敏感指數：{{result.totalPoint}}</p>
 					<a href="" class="btn btn-info col-lg-7" @click.prevent="isShow=!isShow">詳細資訊 </a>
 					<a href="#" class="btn btn-info plus col-lg-3 mt-2 mt-lg-0">+</a>
 				</div>
@@ -15,12 +18,9 @@
 					<ul>
 						<li v-for="c in result.che">{{c.eName}}-{{c.cName}}</li>
 					</ul>
-					啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-					啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-					啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
 				</div>
-				<a href="#" class="btn btn-info" @click.prevent="isShow=!isShow" style="margin-bottom: 10px;">
-					---- 
+				<a href="#" class="btn btn-info" @click.prevent="isShow=!isShow" style="margin-bottom: 10px;font-size: 20px;">
+					←
 				</a>
 
 			</div>
@@ -32,7 +32,7 @@
 
 <script>
 	export default {
-		props: ['result'],
+		props: ['result','skin'],
 		data() {
 			return {
 				isShow: true

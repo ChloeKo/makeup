@@ -6,8 +6,8 @@
 				<AddChe v-if="isAdd"  @close="closeAdd"></AddChe>
 			</transition>
 			<div class="col-5 col-md-3">
-				<input type="text" class="form-control" placeholder="搜尋成分" v-model="search">
-				<ul class="search col-9 list-group" style="padding: 0; border: none; border-radius: 20px;">
+				<input type="search" class="form-control" placeholder="搜尋成分" v-model="search">
+				<ul class="search col-9 list-group" style="padding: 0; border: none; border-radius: 20px;" v-if="isSearch">
 					<li v-for="l in list" class="list-group-item" style="width: 100%;"><a :href="'#'+l.eName">{{l}}</a></li>
 				</ul>
 			</div>		
@@ -27,7 +27,8 @@
 				isAdd:false,
 				data:{},
 				search:'',
-				list:[]
+				list:[],
+				isSearch:false
 				}
 		},
 		components:{
@@ -55,6 +56,11 @@
 		},
 		watch:{
 			search(){
+				if(this.search == ""){
+					this.isSearch = false;
+				}else if(this.search.length>0){
+					this.isSearch = true;	
+				}
 				this.list = [];
 				let temp = [];
 				for(let i=0;i<this.data.length;i++){	

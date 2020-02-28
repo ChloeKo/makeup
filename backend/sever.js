@@ -1,14 +1,29 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 5000;
-const mongoose = require('mongoose');
-const che = require('./models/che.js');
-const skin = require('./models/skinCares.js');
-const db = "mongodb+srv://104602517:a87879561@cluster0-vlh3m.mongodb.net/test?retryWrites=true&w=majority";
-const bodyParser = require('body-parser');
+const express 				= require('express');
+const app 					= express();
+const port 					= process.env.PORT || 5000;
+const mongoose 				= require('mongoose');
+const che 					= require('./models/che.js');
+const skin 					= require('./models/skinCares.js');
+const db 					= "mongodb+srv://104602517:a87879561@cluster0-vlh3m.mongodb.net/test?retryWrites=true&w=majority";
+const bodyParser 			= require('body-parser');
+var user 				 	= require("./models/user.js");
+// var passport			 	= require("passport");
+// var passportLocal		 	= require("passport-local");
+// var passportLocalMongoose	= require("passport-local-mongoose");
+// var session 			 	= require("express-session");
+mongoose.connect(db).then(()=>console.log('db connected'))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-mongoose.connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true }).then(()=>console.log("db conneted"))
+// app.use(session({
+// 	secret:"Hello this is chloe",
+// 	resave:false,
+// 	saveUninitialized:false
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(new passportLocal(user.authenticate()));
+// passport.serializeUser(user.serializeUser());
+// passport.deserializeUser(user.deserializeUser());
 
 
 app.post('/che/new',(req,res)=>{
@@ -91,9 +106,10 @@ app.post('/skin/search',(req,res)=>{
 			compareNum = (a, b)=>{
 				return a.totalC - b.totalC;
 			};
-		}else{
+		}else if(req.body.params.skin=='所有肌膚'){
 			for( let i = 0; i <beforeSort.length; i++){
 				beforeSort[i].totalPoint = beforeSort[i].totalA + beforeSort[i].totalB + beforeSort[i].totalC;
+				console.log(beforeSort)
 			}
 			compareNum = (a, b)=>{
 				return a.totalPoint - b.totalPoint;
@@ -104,6 +120,10 @@ app.post('/skin/search',(req,res)=>{
 		res.json(beforeSort);
 	})
 	
+})
+
+app.post('/register',(req,res)=>{
+	console.log(req.body.params);
 })
 
 app.listen(port,()=>{
