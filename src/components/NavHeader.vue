@@ -22,7 +22,7 @@
 			  <router-link class="nav-link" to="/login" active-class="active" exact>登入 <span class="sr-only">(current)</span></router-link>
 			</li>
 			<li class="nav-item">
-			  <router-link class="nav-link" to="/regist">註冊</router-link>
+			  <router-link class="nav-link" to="/regist" active-class="active" exact>註冊</router-link>
 			</li>
 		</ul>
 	  </div>

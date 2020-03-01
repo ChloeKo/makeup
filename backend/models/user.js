@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
 	},
 	chart:{
 		type:Array
+	},
+	manager:{
+		type:Boolean,
+		default:false
 	}
 })
 

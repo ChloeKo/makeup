@@ -5,7 +5,7 @@
 				<span>暱稱：</span>
 				<input type="text" class="form-control col-12" placeholder="五字元以內的暱稱" v-model="name">
 				<span>帳號：</span>
-				<input type="text" class="form-control col-12" placeholder="建議使用email" v-model="email">
+				<input type="text" class="form-control col-12" placeholder="使用email註冊" v-model="email">
 				<span>密碼：</span>
 				<input type="password" class="form-control col-12" placeholder="五字元以上的密碼" v-model="password">
 				<input type="button" class="btn btn-lg btn-info mt-3 col-12" value="註冊" @click="regist">
@@ -31,7 +31,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.box{
 		width: 100%;
 		margin: 100px auto;
