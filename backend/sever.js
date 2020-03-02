@@ -181,11 +181,15 @@ app.post('/login', (req, res) => {
 							})
 						})
 					} else {
-						console.log('login failed');
+						res.json({
+							fail:'noPass'
+						})
 					}
 				});
 			} else {
-				console.log('user not found')
+				res.json({
+					fail:'noAcc'
+				})
 			}
 		})
 })

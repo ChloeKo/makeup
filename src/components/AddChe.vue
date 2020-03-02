@@ -54,7 +54,14 @@
 				newChe.bPoint = this.bPoint;
 				newChe.cPoint = this.cPoint;
 				newChe.des = this.des;
-				this.axios.post('/api/che/new',newChe);
+				this.axios.post('/api/che/new',newChe)
+				.then()
+				.catch(err=>{
+					if(err.response.status == 401){
+						localStorage.removeItem('eleToken')
+						this.$router.push('/login');
+					}
+					});
 				this.eName = '';
 				this.cName = '';
 				this.aPoint = '';

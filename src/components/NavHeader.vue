@@ -17,7 +17,7 @@
 	      </li>
 
 	    </ul>
-		<ul class="navbar-nav ml-auto">
+		<ul class="navbar-nav ml-auto" v-if="!loginState">
 			<li class="nav-item ">
 			  <router-link class="nav-link" to="/login" active-class="active" exact>登入 <span class="sr-only">(current)</span></router-link>
 			</li>
@@ -25,11 +25,35 @@
 			  <router-link class="nav-link" to="/regist" active-class="active" exact>註冊</router-link>
 			</li>
 		</ul>
+		<ul class="navbar-nav ml-auto" v-if="loginState">
+			<li class="nav-item ">
+			  <span class="nav-link">Hello! {{userInfo.name}} <span class="sr-only">(current)</span></span>
+			</li>
+			<li class="nav-item">
+			  <a class="nav-link" href="#" @click="singOut">登出</a>
+			</li>
+		</ul>
 	  </div>
 	</nav>
 </template>
 
 <script>
+	import {mapGetters} from 'vuex'
+	export default{
+		computed:{
+			...mapGetters([
+				'userInfo',
+				'loginState'
+			])
+		},
+		methods:{
+			singOut(){
+				localStorage.removeItem('eleToken');
+				this.$store.dispatch('logOut');	
+				location.reload();
+			}
+		}
+	}
 </script>
 
 <style scoped>

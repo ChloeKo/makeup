@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
 		<NavHeader></NavHeader>
-		<transition name="fade" mode="out-in">
+		<transition name="fade" mode="out-in" appear>
 			<keep-alive>
-				<router-view :data="che"></router-view>
+				<router-view></router-view>
 			</keep-alive>
 		</transition>
 	</div>
@@ -12,11 +12,10 @@
 <script>
 	import LandingPage from './components/LandingPage.vue'
 	import NavHeader from './components/NavHeader.vue'
-	import {data} from './data/data.js'
 	export default {
 		data() {
 			return {
-				che: data
+				
 			}
 		},
 		components: {
@@ -27,16 +26,19 @@
 </script>
 
 <style>
-	.fade-enter{
+	.fade-enter {
 		opacity: 0;
 	}
-	.fade-enter-active{
-		transition: opacity 0.6s; 
+
+	.fade-enter-active {
+		transition: opacity 0.9s linear;
 	}
-	.fade-leave-active{
+
+	.fade-leave-active {
 		opacity: 0;
-		transition: opacity 0.6s;
+		transition: opacity 0.9s;
 	}
+
 	body {
 		background: pink;
 	}

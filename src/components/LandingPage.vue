@@ -27,7 +27,6 @@
 
 <script>
 	export default{
-	
 	}
 </script>
 
@@ -43,10 +42,10 @@
 	
 	.box3{
 		background: pink;
-		height: 490px;
+		height: 510px;
 	}
 	.box1,.box2,.box4{
-		height: 490px;
+		height: 510px;
 		display: inline-block;
 		/* float: right; */
 		background: pink;

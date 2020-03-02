@@ -39,7 +39,7 @@
 			console.log('before')
 			this.axios.get('/api/che').then((response) => {
 			  this.data = response.data
-			})
+			}).catch(err=>console.log(err))
 		},
 		methods:{
 			closeAdd(){
