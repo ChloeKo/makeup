@@ -1,4 +1,4 @@
-<template>
+	<template>
 	<div class="container">
 		<div class="row box">
 			<form class="form-group">
@@ -22,7 +22,10 @@
 		},
 		methods:{
 			login(){
-				this.axios.post('/api/login',{params:{email:this.email,password:this.password}});
+				this.axios.post('/api/login',{params:{email:this.email,password:this.password}}).then(result=>{
+					console.log(result.data.token)
+					localStorage.setItem('eleToken',result.data.token)
+				});
 			}
 		}
 	}

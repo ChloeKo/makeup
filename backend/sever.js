@@ -36,7 +36,7 @@ passport.use('token', new JwtStrategy(opts, (jwt_payload, done) => {
 
 // @新增化學物質
 // @Private
-app.post('/che/new', (req, res) => {
+app.post('/che/new', passport.authenticate('token', {session: false}),(req, res) => {
 	let cheFiled = {};
 	cheFiled.eName = req.body.eName;
 	cheFiled.cName = req.body.cName;
@@ -175,7 +175,6 @@ app.post('/login', (req, res) => {
 							expiresIn: 10800
 						}, (err, token) => {
 							if (err) throw err;
-							console.log('Bearer ' + token)
 							res.json({
 								success: true,
 								token: 'Bearer ' + token
