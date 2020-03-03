@@ -30,6 +30,9 @@
 			  <span class="nav-link">Hello! {{userInfo.name}} <span class="sr-only">(current)</span></span>
 			</li>
 			<li class="nav-item">
+			  <router-link class="nav-link" to="/wish">願望列表<span class="sr-only">(current)</span></router-link>
+			</li>
+			<li class="nav-item">
 			  <a class="nav-link" href="#" @click="singOut">登出</a>
 			</li>
 		</ul>

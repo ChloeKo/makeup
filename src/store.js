@@ -17,6 +17,7 @@ export const store = new Vuex.Store({
 		setUserInfo:(state,info)=>{
 			state.user.name = info.name;
 			state.user.manager = info.manager;
+			state.user.id = info.id;
 		},
 		logOut:state=>{
 			state.login = false;

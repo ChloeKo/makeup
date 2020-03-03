@@ -1,5 +1,8 @@
 <template>
 	<div class="container">
+		<transition name="slide" mode="out-in">
+			<div class="info" v-if="statusState">{{status}}</div>
+		</transition>
 		<div class="row box">
 			<form class="form-group">
 				<span>暱稱：</span>
@@ -20,12 +23,29 @@
 			return {
 				name:'',
 				email:'',
-				password:''
+				password:'',
+				statusState:false
 			}
 		},
 		methods:{
 			regist(){
-				this.axios.post('/api/register',{params:{name:this.name,email:this.email,password:this.password}});
+				this.axios.post('/api/register',{params:{name:this.name,email:this.email,password:this.password}})
+				.then(res=>{
+					if(res.data.fail == 'Email exist'){
+						setTimeout(()=>{this.statusState = false},1000)
+						this.status = '此電子郵件已註冊過!'
+						this.statusState = true;
+					}
+					else{
+						const vm = this;
+						setTimeout(()=>{this.statusState = false},1000)
+						setTimeout(()=>{
+							vm.$router.push('/login');
+						},600)
+						this.status = '註冊成功!'
+						this.statusState = true;
+					}
+				});
 			}
 		}
 	}
@@ -40,6 +60,50 @@
 			font-family: 'Noto Sans TC', sans-serif;
 			width: 80%;
 			margin: 0 auto;
+		}
+	}
+	.info{
+		font-weight: 600;
+		border-radius: 10px;
+		width: 70%;
+		height: 70px;
+		line-height: 70px;
+		text-align: center;
+		background: #138496;
+		border: 1px solid rgba(150,180,190,1);
+		position: fixed;
+		z-index: 99;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.slide-enter-active{
+		opacity: 1;
+		transition: opacity;
+		left:15%;
+		animation: slide-in ease 0.7s;
+	}
+	.slide-leave-active{
+		left:15%;
+		animation: slide-out ease 0.7s;
+	}
+	@keyframes slide-in{
+		from{
+			transform: translate(0px,-35px);
+			opacity: 0;
+		}
+		to{
+			transform: translate(0px,0px);
+			opacity: 1;
+		}
+	}
+	@keyframes slide-out{
+		from{
+			opacity: 1;
+			transform: translate(0px,0px);
+		}
+		to{
+			opacity: 0;
+			transform: translate(0px,-35px);
 		}
 	}
 </style>

@@ -45,7 +45,8 @@
 						this.$store.dispatch('setLoginToTrue');
 						const userInfo = {
 							name:decoded.name,
-							manager:decoded.manager
+							manager:decoded.manager,
+							id:decoded.id
 						}
 						this.$store.dispatch('setUserInfo',userInfo);
 						this.$router.push('/');

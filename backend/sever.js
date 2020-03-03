@@ -142,17 +142,24 @@ app.post('/skin/search', (req, res) => {
 // @註冊
 // @Public
 app.post('/register', (req, res) => {
-	const newUser = new user({
-		name: req.body.params.name,
-		email: req.body.params.email,
-		password: req.body.params.password
-	})
-	bcrypt.genSalt(10, (err, salt) => {
-		bcrypt.hash(newUser.password, salt, (err, hash) => {
-			newUser.password = hash;
-			newUser.save().then(result => console.log(result)).catch(err => console.log(err));
-		});
-	});
+	user.find({email:req.body.params.email}).then(result=>{
+		if(result.length!=0){
+			res.json({fail:'Email exist'})
+		}else if(result.length==0){
+			const newUser = new user({
+				name: req.body.params.name,
+				email: req.body.params.email,
+				password: req.body.params.password
+			})
+			bcrypt.genSalt(10, (err, salt) => {
+				bcrypt.hash(newUser.password, salt, (err, hash) => {
+					newUser.password = hash;
+					newUser.save().then(result => console.log(result)).catch(err => console.log(err));
+				});
+			});
+			res.json({success:true})
+		}
+	})	
 
 })
 
@@ -194,8 +201,24 @@ app.post('/login', (req, res) => {
 		})
 })
 
-app.get('/Test', passport.authenticate('token', {session: false}), (req, res) => {
-	res.json(req.user);
+
+
+app.post('/addChart',(req,res)=>{
+	user.findById(req.body.params.id).then(foundUser=>{
+		foundUser.chart.push(req.body.params.result);
+		foundUser.save();
+		res.json({
+			msg:'Chart added'
+		})
+	})
+})
+
+app.post('/getWish',(req,res)=>{
+	user.findById(req.body.params.id).then(result=>{
+		res.json({
+			data:result.chart
+		})
+	})
 })
 
 app.listen(port, () => {
