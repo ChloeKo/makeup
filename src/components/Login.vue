@@ -59,14 +59,15 @@
 </script>
 
 <style lang="scss" scoped>
+	$color:#fefefe;
 	.info{
 		font-weight: 600;
 		border-radius: 10px;
-		width: 70%;
-		height: 70px;
-		line-height: 70px;
+		width: 20%;
+		height: 240px;
+		line-height: 240px;
 		text-align: center;
-		background: #138496;
+		background: rgba($color,0.9);
 		border: 1px solid rgba(150,180,190,1);
 		position: fixed;
 		z-index: 99;
@@ -90,11 +91,11 @@
 	.slide-enter-active{
 		opacity: 1;
 		transition: opacity;
-		left:15%;
+		left:40%;
 		animation: slide-in ease 0.7s;
 	}
 	.slide-leave-active{
-		left:15%;
+		left:40%;
 		animation: slide-out ease 0.7s;
 	}
 	@keyframes slide-in{
