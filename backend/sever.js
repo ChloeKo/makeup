@@ -154,10 +154,9 @@ app.post('/register', (req, res) => {
 			bcrypt.genSalt(10, (err, salt) => {
 				bcrypt.hash(newUser.password, salt, (err, hash) => {
 					newUser.password = hash;
-					newUser.save().then(result => console.log(result)).catch(err => console.log(err));
+					newUser.save().then(result => {res.json({success:true})}).catch(err => res.json({success:false}));
 				});
 			});
-			res.json({success:true})
 		}
 	})	
 

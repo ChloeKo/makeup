@@ -60,15 +60,16 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+	$color:#d1ecf1;
 	.info{
 		font-weight: 600;
 		border-radius: 10px;
 		width: 70%;
-		height: 70px;
-		line-height: 70px;
+		height: 100px;
+		line-height: 100px;
 		text-align: center;
-		background: #138496;
+		background: rgba($color,0.9);
 		border: 1px solid rgba(150,180,190,1);
 		position: fixed;
 		z-index: 99;

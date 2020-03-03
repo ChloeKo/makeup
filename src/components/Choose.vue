@@ -18,7 +18,7 @@
 			<button class="btn btn-lg btn-info col-7" @click="search">Go!</button>
 			<transition name="shrink" mode="out-in">
 				<div class="result" v-if="is">
-					<span @click="is = !is">X</span>
+					<span @click="is = !is" class="col-2 ml-auto">X</span>
 					<div class="row justify-content-around">
 						<Result v-for="r in result" :result="r" :skin="skin"></Result>
 					</div>
@@ -83,6 +83,8 @@
 		background: rgba(240,240,240,0.8);
 	}
 	span{
+		width: 30px;
+		display: block;
 		height: 32px;
 		color: white;
 		font-weight: 700;

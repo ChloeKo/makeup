@@ -36,13 +36,17 @@
 						this.status = '此電子郵件已註冊過!'
 						this.statusState = true;
 					}
-					else{
+					else if(res.data.success == true){
 						const vm = this;
 						setTimeout(()=>{this.statusState = false},1000)
 						setTimeout(()=>{
 							vm.$router.push('/login');
 						},600)
 						this.status = '註冊成功!'
+						this.statusState = true;
+					}else if(res.data.success == false){
+						setTimeout(()=>{this.statusState = false},1000)
+						this.status = '註冊異常!請重新嘗試'
 						this.statusState = true;
 					}
 				});
@@ -62,14 +66,15 @@
 			margin: 0 auto;
 		}
 	}
+	$color:#fefefe;
 	.info{
 		font-weight: 600;
 		border-radius: 10px;
-		width: 70%;
-		height: 70px;
-		line-height: 70px;
+		width: 20%;
+		height: 240px;
+		line-height: 240px;
 		text-align: center;
-		background: #138496;
+		background: rgba($color,0.9);
 		border: 1px solid rgba(150,180,190,1);
 		position: fixed;
 		z-index: 99;
@@ -79,11 +84,11 @@
 	.slide-enter-active{
 		opacity: 1;
 		transition: opacity;
-		left:15%;
+		left:40%;
 		animation: slide-in ease 0.7s;
 	}
 	.slide-leave-active{
-		left:15%;
+		left:40%;
 		animation: slide-out ease 0.7s;
 	}
 	@keyframes slide-in{
