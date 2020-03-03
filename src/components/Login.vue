@@ -8,8 +8,8 @@
 				<span>帳號：</span>
 				<input type="text" class="form-control col-12" placeholder="通常為你的電子郵件" v-model="email">
 				<span>密碼：</span>
-				<input type="password" class="form-control col-12" placeholder="五字元以上的密碼" v-model="password">
-				<input type="button" class="btn btn-lg btn-info mt-3 col-12" value="登入" @click="login">
+				<input type="password" class="form-control col-12 password" placeholder="五字元以上的密碼" v-model="password" @keydown.enter="logByEnter">
+				<input type="button" class="btn btn-lg btn-info mt-3 col-12" value="登入" ref="sub" @click="login">
 				<p>還沒有帳號嗎?前往<router-link to="regist">註冊</router-link></p>
 			</form>
 		</div>
@@ -53,6 +53,9 @@
 					}
 					
 				});
+			},
+			logByEnter(){
+				this.$refs.sub.focus();
 			}
 		}
 	}

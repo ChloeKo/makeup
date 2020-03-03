@@ -202,23 +202,33 @@ app.post('/login', (req, res) => {
 
 app.post('/addChart',(req,res)=>{
 	user.findById(req.body.params.id).then(foundUser=>{
+		var dup = false;
 		if(foundUser.chart.length!=0){
 			for(let i = 0; i < foundUser.chart.length; i++){
 				if(foundUser.chart[i]._id == req.body.params.result._id){
-					console.log("已存在");
-					break;
-				}else{
-					foundUser.chart.push(req.body.params.result);
+					dup = true;
 					break;
 				}
 			}
+			if(dup == true){
+				console.log("已存在");
+				res.json({
+					msg:'wish exist'
+				})
+			}else{
+				foundUser.chart.push(req.body.params.result);
+				foundUser.save();
+				res.json({
+					msg:'Chart added'
+				})
+			}
 		}else{
 			foundUser.chart.push(req.body.params.result);
+			foundUser.save();
+			res.json({
+				msg:'Chart added'
+			})
 		}
-		foundUser.save();
-		res.json({
-			msg:'Chart added'
-		})
 	})
 })
 
@@ -228,6 +238,13 @@ app.post('/getWish',(req,res)=>{
 			data:result.chart
 		})
 	})
+})
+
+app.post('/deleteWish',(req,res)=>{
+	user.findById(req.body.params.id)
+	.then(foundUser=>console.log(foundUser))
+	// console.log(req.body.params.name)
+	// console.log(req.body.params.id)
 })
 
 app.listen(port, () => {

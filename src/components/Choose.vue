@@ -21,6 +21,7 @@
 					<span @click="is = !is" class="col-2 ml-auto">X</span>
 					<div class="row justify-content-around">
 						<Result v-for="r in result" :result="r" :skin="skin"></Result>
+						<div class="top" @click="rollTop">Top</div>
 					</div>
 				</div>
 			</transition>
@@ -51,6 +52,9 @@
 					console.log(err);
 				});
 				
+			},
+			rollTop(){
+				window.scrollTo(0,0);
 			}
 		},
 		components:{
@@ -59,7 +63,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	p{
 		margin-bottom: 2px;
 		text-align: center;
@@ -94,6 +98,25 @@
 		padding: 2px 8px 2px 8px;
 		margin: 9px;
 		cursor: pointer;
+	}
+	.top{
+		cursor: pointer;
+		color: darken(gray,20%);
+		position: fixed;
+		bottom: 50px;
+		right: 30px;
+		text-align: center;
+		line-height: 80px;
+		// border-radius: 50%;
+		clip-path: polygon(50% 0, 100% 50%, 75% 50%, 75% 100%, 25% 100%, 25% 50%, 0 50%);
+		// box-shadow: 1px 1px 1px 1px lighten(black,40%);
+		background: rgba(255,255,255,0.5);
+		width: 80px;
+		height: 80px;
+		&:hover{
+			background: rgba(134,71,63,1);
+			color: pink;
+		}
 	}
 	.shrink-enter{
 		width: 0;

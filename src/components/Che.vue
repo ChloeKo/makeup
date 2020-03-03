@@ -15,6 +15,7 @@
 			<div class="group row justify-content-center">
 				<OneChe v-for="d in data" :d="d"></OneChe>
 			</div>
+			<div class="top" @click="rollTop">Top</div>
 	</div>
 </template>
 
@@ -48,6 +49,9 @@
 				  this.data = response.data;
 				})
 			},
+			rollTop(){
+				window.scrollTo(0,0);
+			}
 			// searching(){
 			// 	for(let i=0;i<this.data.length;i++){
 			// 		console.log(this.data[i].eName) 
@@ -78,7 +82,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.head{
 		margin-top: 120px;
 	}
@@ -116,6 +120,25 @@
 		/* width: 206.594px; */
 		background: white;
 		list-style: none;
+	}
+	.top{
+		cursor: pointer;
+		color: darken(gray,20%);
+		position: fixed;
+		bottom: 50px;
+		right: 30px;
+		text-align: center;
+		line-height: 80px;
+		// border-radius: 50%;
+		clip-path: polygon(50% 0, 100% 50%, 75% 50%, 75% 100%, 25% 100%, 25% 50%, 0 50%);
+		// box-shadow: 1px 1px 1px 1px lighten(black,40%);
+		background: rgba(255,255,255,0.5);
+		width: 80px;
+		height: 80px;
+		&:hover{
+			background: rgba(134,71,63,1);
+			color: pink;
+		}
 	}
 	@keyframes slide-in{
 		from{

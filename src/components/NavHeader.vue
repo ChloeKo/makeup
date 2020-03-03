@@ -27,7 +27,7 @@
 		</ul>
 		<ul class="navbar-nav ml-auto" v-if="loginState">
 			<li class="nav-item ">
-			  <span class="nav-link">Hello! {{userInfo.name}} <span class="sr-only">(current)</span></span>
+			  <span class="nav-link user">Hello! {{userInfo.name}} <span class="sr-only">(current)</span></span>
 			</li>
 			<li class="nav-item">
 			  <router-link class="nav-link" to="/wish">願望列表<span class="sr-only">(current)</span></router-link>
@@ -67,7 +67,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.navbar{
 		background: rgba(235,235,235,0.95)!important;
 	}
@@ -78,6 +78,23 @@
 	@media (max-width: 320px) {
 		.navbar-brand{
 			font-size: 13px;
+		}
+	}
+	.user{
+		cursor: default;
+		color: black!important;
+		font-weight: 300;
+		animation: pop 2s linear infinite;
+	}
+	@keyframes pop{
+		0%{
+			font-weight: 300;
+		}
+		60%{
+			font-weight: 750;
+		}
+		100%{
+			font-weight: 400;
 		}
 	}
 </style>

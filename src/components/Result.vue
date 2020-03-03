@@ -25,7 +25,6 @@
 				<a href="#" class="btn btn-info" @click.prevent="isShow=!isShow" style="margin-bottom: 10px;font-size: 20px;">
 					←
 				</a>
-
 			</div>
 		</transition>
 
@@ -48,10 +47,18 @@
 				if(this.$store.getters.loginState == false){
 					console.log('請先登入!')
 				}else if(this.$store.getters.loginState == true){
-					this.axios.post('/api/addChart',{params:{result:this.result,id:this.$store.getters.userInfo.id}});
-					this.status = '新增至願望清單!'
-					setTimeout(()=>{this.statusState = false},1000)
-					this.statusState = true;
+					this.axios.post('/api/addChart',{params:{result:this.result,id:this.$store.getters.userInfo.id}})
+					.then(res=>{
+						if(res.data.msg == 'wish exist'){
+							this.status = '此商品已在願望清單!'
+							setTimeout(()=>{this.statusState = false},1000)
+							this.statusState = true;
+						}else{
+							this.status = '新增至願望清單!'
+							setTimeout(()=>{this.statusState = false},1000)
+							this.statusState = true;
+						}
+						})		
 				}
 				
 				
@@ -72,6 +79,7 @@
 		background: rgba($color,0.9);
 		border: 1px solid rgba(150,180,190,1);
 		position: fixed;
+		top:20%;
 		z-index: 99;
 		left: 50%;
 		transform: translateX(-50%);
