@@ -242,7 +242,18 @@ app.post('/getWish',(req,res)=>{
 
 app.post('/deleteWish',(req,res)=>{
 	user.findById(req.body.params.id)
-	.then(foundUser=>console.log(foundUser))
+	.then(foundUser=>{
+		for(let i = 0 ; i < foundUser.chart.length ; i++){
+			if(foundUser.chart[i].name == req.body.params.name){
+				foundUser.chart.splice(i,1);
+				foundUser.save();
+				break;
+			}
+		}
+		res.json({});
+	})
+	
+	
 	// console.log(req.body.params.name)
 	// console.log(req.body.params.id)
 })

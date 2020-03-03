@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row justify-content-around mt-5">
 			<div v-for="d in datas" class="card col-7 col-sm-5 col-md-3 mr-2 mb-5">
-				<a href="#" class="delete ml-auto" @click.prevent="deleteWish(d.name,user)">x</a>
+				<a href="#" class="delete ml-auto" @click.prevent="deleteWish(d.name)">x</a>
 				<div v-if="isShow">
 					<img :src="d.pic" class="card-img-top" alt="">
 					<div class="card-body">
@@ -52,7 +52,11 @@
 		methods:{
 			deleteWish(name,user){
 				user = this.$store.getters.userInfo.id;
-				this.axios.post('/api/deleteWish',{params:{name:name,id:user}});
+				this.axios.post('/api/deleteWish',{params:{name:name,id:user}}).then(result=>{
+					this.axios.post('/api/getWish',{params:{id:this.$store.getters.userInfo.id}})
+					.then(result=>this.datas = result.data.data);
+				})
+				
 			}
 		}
 	}
