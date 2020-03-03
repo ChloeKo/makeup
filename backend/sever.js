@@ -200,11 +200,21 @@ app.post('/login', (req, res) => {
 		})
 })
 
-
-
 app.post('/addChart',(req,res)=>{
 	user.findById(req.body.params.id).then(foundUser=>{
-		foundUser.chart.push(req.body.params.result);
+		if(foundUser.chart.length!=0){
+			for(let i = 0; i < foundUser.chart.length; i++){
+				if(foundUser.chart[i]._id == req.body.params.result._id){
+					console.log("已存在");
+					break;
+				}else{
+					foundUser.chart.push(req.body.params.result);
+					break;
+				}
+			}
+		}else{
+			foundUser.chart.push(req.body.params.result);
+		}
 		foundUser.save();
 		res.json({
 			msg:'Chart added'
