@@ -234,9 +234,15 @@ app.post('/addChart',(req,res)=>{
 
 app.post('/getWish',(req,res)=>{
 	user.findById(req.body.params.id).then(result=>{
-		res.json({
-			data:result.chart
-		})
+		if(result.chart.length == 0){
+			res.json({
+				data:'empty'
+			})
+		}else{
+			res.json({
+				data:result.chart
+			})
+		}
 	})
 })
 

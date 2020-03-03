@@ -1,9 +1,9 @@
 <template>
 	<div class="container">
 		<div class="row justify-content-around mt-5">
-			<div v-for="d in datas" class="card col-7 col-sm-5 col-md-3 mr-2 mb-5">
+			<div v-for="d in datas" class="card col-7 col-sm-5 col-md-3 mr-2 mb-5" v-if="isShow">
 				<a href="#" class="delete ml-auto" @click.prevent="deleteWish(d.name)">x</a>
-				<div v-if="isShow">
+				<div>
 					<img :src="d.pic" class="card-img-top" alt="">
 					<div class="card-body">
 						<h5 class="card-title">{{d.name}}</h5>
@@ -27,6 +27,7 @@
 			</div>
 
 		</div>
+		<div class="msg" v-if="msgbox"><p>您的願望清單為空!<br>趕快前往選擇您的願望商品吧!</p></div>
 	</div>
 </template>
 
@@ -35,26 +36,52 @@
 		data(){
 			return {
 				datas:[],
-				isShow:true
+				isShow:true,
+				msgbox:false
 			}
 		},
 		activated(){
 			this.axios.post('/api/getWish',{params:{id:this.$store.getters.userInfo.id}})
 			.then(result=>{
-				this.datas = result.data.data
-				// console.log(result.data.data)
+					if(result.data.data == 'empty'){
+						this.msgbox = true;
+						this.isShow = false;
+					}else{
+						this.datas = result.data.data
+						this.isShow = true;
+						this.msgbox = false;
+					}
 				});
 		},
 		created(){
 			this.axios.post('/api/getWish',{params:{id:this.$store.getters.userInfo.id}})
-			.then(result=>this.datas = result.data.data);
+			.then(result=>{
+				if(result.data.data == 'empty'){
+					this.msgbox = true;
+					this.isShow = false;
+				}else{
+					this.datas = result.data.data
+					this.isShow = true;
+					this.msgbox = false;
+				}
+			});
 		},
 		methods:{
 			deleteWish(name,user){
 				user = this.$store.getters.userInfo.id;
 				this.axios.post('/api/deleteWish',{params:{name:name,id:user}}).then(result=>{
 					this.axios.post('/api/getWish',{params:{id:this.$store.getters.userInfo.id}})
-					.then(result=>this.datas = result.data.data);
+					.then(result=>{
+						if(result.data.data == 'empty'){
+							this.msgbox = true
+							this.isShow = false;
+							this.datas = result.data.data
+						}else{
+							this.datas = result.data.data
+							this.isShow = true;
+							this.msgbox = false;
+						}
+					});
 				})
 				
 			}
@@ -63,6 +90,21 @@
 </script>
 
 <style lang="scss" scoped>
+	.msg{
+		font-family: 'Noto Sans TC', sans-serif;
+		margin: 100px auto;
+		height: 300px;
+		width: 300px;
+		text-align: center;
+		border-radius: 20px;
+		background: rgba(#fefefe,0.8);
+		// line-height: 300px;
+		border: 1px solid lighten(gray,30%);
+		box-shadow: 1px 1px 1px 1px lighten(gray,10%);
+		p{
+			margin-top: 120px;
+		}
+	}
 	.card {
 		border-radius: 20px;
 		margin-top: 20px;
