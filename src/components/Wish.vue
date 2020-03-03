@@ -30,7 +30,7 @@
 			this.axios.post('/api/getWish',{params:{id:this.$store.getters.userInfo.id}})
 			.then(result=>{
 				this.datas = result.data.data
-				console.log(result.data.data)
+				// console.log(result.data.data)
 				});
 		},
 		created(){

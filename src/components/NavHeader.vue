@@ -42,6 +42,7 @@
 
 <script>
 	import {mapGetters} from 'vuex'
+	
 	export default{
 		computed:{
 			...mapGetters([
@@ -51,9 +52,16 @@
 		},
 		methods:{
 			singOut(){
-				localStorage.removeItem('eleToken');
-				this.$store.dispatch('logOut');	
-				location.reload();
+				const currentRouter = this.$router.currentRoute.path;
+				if(currentRouter=='/'){
+					localStorage.removeItem('eleToken');
+					this.$store.dispatch('logOut');	
+					location.reload();
+				}else{
+					localStorage.removeItem('eleToken');
+					this.$store.dispatch('logOut');
+					this.$router.push('/');
+				}	
 			}
 		}
 	}
