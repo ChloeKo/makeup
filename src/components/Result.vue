@@ -11,7 +11,7 @@
 					<p class="card-text" v-if="skin=='痘痘肌'">痘痘肌敏感指數：{{result.totalA}}</p>
 					<p class="card-text" v-if="skin=='敏感肌'">敏感肌敏感指數：{{result.totalB}}</p>
 					<p class="card-text" v-if="skin=='酒糟肌'">酒糟肌敏感指數：{{result.totalC}}</p>
-					<p class="card-text" v-if="skin=='所有肌膚'">綜合敏感指數：{{result.totalPoint}}</p>
+					<!-- <p class="card-text" v-if="skin=='所有肌膚'">綜合敏感指數：{{result.totalPoint}}</p> -->
 					<a href="" class="btn btn-info col-lg-7" @click.prevent="isShow=!isShow">詳細資訊 </a>
 					<a href="#" class="btn btn-info plus col-lg-3 mt-2 mt-lg-0" @click.prevent="addToChart">+</a>
 				</div>
@@ -45,7 +45,9 @@
 		methods:{
 			addToChart(){
 				if(this.$store.getters.loginState == false){
-					console.log('請先登入!')
+					this.status = '請先進行登入'
+					setTimeout(()=>{this.statusState = false},1000)
+					this.statusState = true;
 				}else if(this.$store.getters.loginState == true){
 					this.axios.post('/api/addChart',{params:{result:this.result,id:this.$store.getters.userInfo.id}})
 					.then(res=>{

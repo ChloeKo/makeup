@@ -8,7 +8,7 @@
 			<div class="col-5 col-md-3">
 				<input type="search" class="form-control" placeholder="搜尋成分" v-model="search">
 				<ul class="search col-9 list-group" style="padding: 0; border: none; border-radius: 20px;" v-if="isSearch">
-					<li v-for="l in list" class="list-group-item" style="width: 100%;"><a :href="'#'+l.eName">{{l}}</a></li>
+					<li v-for="l in list" class="list-group-item" style="width: 100%;"><a :href="'#'+l">{{l}}</a></li>
 				</ul>
 			</div>		
 		</div>
@@ -90,7 +90,7 @@
 		display: inline;
 	}
 	.container{
-		background: pink
+		background: lighten(rgb(215,196,187),1%);
 	}
 	.group{
 		margin-top: 20px;

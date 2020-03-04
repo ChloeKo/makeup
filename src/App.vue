@@ -25,7 +25,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.fade-enter {
 		opacity: 0;
 	}
@@ -40,6 +40,6 @@
 	}
 
 	body {
-		background: pink;
+		background: lighten(rgb(215,196,187),1%);
 	}
 </style>

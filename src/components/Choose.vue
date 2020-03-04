@@ -6,7 +6,7 @@
 				<option>痘痘肌</option>
 				<option>敏感肌</option>
 				<option>酒糟肌</option>
-				<option>所有肌膚</option>
+<!-- 				<option>所有肌膚</option> -->
 			</select>
 			<p class="col-7">適合使用的</p>
 			<select class="tp col-8 col-md-7  form-control mb-5" v-model="tp">

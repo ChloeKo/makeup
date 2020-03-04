@@ -10,7 +10,7 @@
 						<p class="card-text">痘痘肌敏感指數：{{d.totalA}}</p>
 						<p class="card-text">敏感肌敏感指數：{{d.totalB}}</p>
 						<p class="card-text">酒糟肌敏感指數：{{d.totalC}}</p>
-						<p class="card-text">綜合敏感指數：{{d.totalPoint}}</p>
+						<!-- <p class="card-text">綜合敏感指數：{{d.totalPoint}}</p> -->
 						<a href="" class="btn btn-info col-lg-7" @click.prevent="isShow=!isShow">詳細資訊 </a>
 					</div>
 				</div>
